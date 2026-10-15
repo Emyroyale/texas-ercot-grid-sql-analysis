@@ -10,7 +10,7 @@ SQL analytics project by **Emy Kirugo**, analyzing 8,783 hours of real Texas ele
 
 ## Insight 1: Texas set an all-time demand record in August 2024
 
-![Monthly peak demand](screenshots/monthly_peak_demand.png)
+![Monthly peak demand](screenshots/monthly_peak_demand.svg)
 
 Texas hit **85,544 MW** on August 20, 2024 at 6 PM Central - an all-time ERCOT record. Every one of the year's 10 highest-demand hours fell inside a four-day August heat wave (Aug 19-22). Summer still rules the Texas grid, but winter is closer than people think: the January Arctic blast drove demand to 78,155 MW, within 9% of the summer record.
 
@@ -18,7 +18,7 @@ Months are grouped on Central local time so December 31 evening stays in Decembe
 
 ## Insight 2: What powered Texas in 2024
 
-![Annual fuel mix](screenshots/annual_fuel_mix.png)
+![Annual fuel mix](screenshots/annual_fuel_mix.svg)
 
 Natural gas supplied **44.1%** of Texas electricity in 2024, followed by wind (**24.1%**), coal (**12.7%**), solar (**10.3%**), and nuclear (**8.4%**). Wind and solar together delivered **34.4%** of the state's power - more than one in three megawatt-hours.
 
@@ -32,7 +32,7 @@ This uses a top-N-per-group pattern: all 8,783 hours are ordered by demand, the 
 
 ## Insight 4: Texas wind blows at night
 
-![Wind vs demand daily profile](screenshots/daily_profile_wind_vs_demand.png)
+![Wind vs demand daily profile](screenshots/daily_profile_wind_vs_demand.svg)
 
 Wind averaged a **33-34% share of generation overnight** but only **about 19% at midday** - almost perfectly anti-correlated with the afternoon demand peak. The dashed wind line falls exactly as the solid demand line rises. This mismatch is the central planning challenge for a wind-heavy grid: the resource is strongest when the state needs it least.
 

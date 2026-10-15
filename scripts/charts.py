@@ -31,6 +31,7 @@ for b, v in zip(bars, q1["peak_mw"]):
 plt.xticks(rotation=45, ha="right")
 plt.tight_layout()
 plt.savefig(OUT / "monthly_peak_demand.png", bbox_inches="tight")
+plt.savefig(OUT / "monthly_peak_demand.svg", bbox_inches="tight")
 plt.close()
 
 # 2. Annual fuel mix (donut) ----------------------------------------------
@@ -56,6 +57,7 @@ ax.set_title("What Powered Texas in 2024\n(share of total generation, GWh)",
              fontweight="bold", loc="center")
 plt.tight_layout()
 plt.savefig(OUT / "annual_fuel_mix.png", bbox_inches="tight")
+plt.savefig(OUT / "annual_fuel_mix.svg", bbox_inches="tight")
 plt.close()
 
 # 3. Daily profile: demand vs wind by hour --------------------------------
@@ -77,8 +79,9 @@ ax1.set_title("Texas Wind Blows at Night - Missing the Afternoon Peak",
               fontweight="bold", loc="left")
 fig.tight_layout()
 plt.savefig(OUT / "daily_profile_wind_vs_demand.png", bbox_inches="tight")
+plt.savefig(OUT / "daily_profile_wind_vs_demand.svg", bbox_inches="tight")
 plt.close()
 
 print("charts written to", OUT)
-for p in sorted(OUT.glob("*.png")):
+for p in sorted(OUT.glob("*.svg")):
     print(" -", p.name)
