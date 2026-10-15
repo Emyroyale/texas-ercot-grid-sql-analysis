@@ -1,0 +1,6 @@
+# large raw downloads (re-fetch with the URLs in the README)
+data/raw/
+# python env and caches
+.venv/
+__pycache__/
+*.pyc
