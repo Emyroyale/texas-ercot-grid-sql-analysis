@@ -48,8 +48,9 @@ And net power imports/exports averaged **under 0.2% of demand** in every single 
 
 ## Data notes
 
+- **Source:** the two public U.S. EIA Form EIA-930 bulk files for 2024. `scripts/build_db.py` downloads them on first run (cached in `data/raw/`, git-ignored), filters to balancing authority `ERCO`, and builds everything from there. No dataset is checked in; the full pipeline is reproducible from the public source.
 - **Grain:** 1 row = 1 hour; 8,783 rows covering all of 2024, Central Time.
-- **Schema change mid-year:** EIA split its fuel columns in the H2 2024 file (e.g. solar with/without battery storage, hydro excluding pumped storage). `scripts/build_db.py` harmonizes both halves into one stable schema instead of silently dropping the new columns.
+- **Schema change mid-year:** EIA split its fuel columns in the H2 2024 file (e.g. solar with/without battery storage, hydro excluding pumped storage). The script sums the sub-columns back into one stable schema instead of silently dropping them. One judgment call worth knowing: H2's "Unknown Energy Storage" is grouped into `other_mw`, matching the original build; only the column literally named "Battery Storage" feeds `battery_mw`.
 - **The DST hour:** hour `25` on Nov 3 is the repeated 2 a.m. hour when clocks fell back. It is kept as reported, not smoothed away.
 - **Adjusted vs reported:** EIA publishes imputed and adjusted variants of every series. This project uses the reported values and documents the choice, so every number traces back to a published cell.
 
@@ -57,17 +58,17 @@ And net power imports/exports averaged **under 0.2% of demand** in every single 
 
 ```
 ├── README.md
-├── texas_grid.db        # built SQLite database (8,783 rows)
-├── data/
-│   └── ercot_hourly_2024.csv   # analysis-ready dataset
 ├── sql/
 │   ├── schema.sql       # CREATE TABLE ercot_hourly
 │   └── analysis.sql     # 12 analytical queries (Q1-Q12), portable SQL
 ├── screenshots/         # chart outputs
-└── scripts/
-    ├── build_db.py      # ETL: CSV -> SQLite
-    └── charts.py        # regenerates screenshots/ from the database
+├── scripts/
+│   ├── build_db.py      # ETL: downloads EIA files -> clean CSV -> SQLite
+│   └── charts.py        # regenerates screenshots/ from the database
+└── data/raw/            # cached EIA downloads (git-ignored, fetched on first run)
 ```
+
+`data/ercot_hourly_2024.csv` and `texas_grid.db` are build artifacts: `scripts/build_db.py` regenerates both, so they are git-ignored.
 
 ## The 12 queries (`sql/analysis.sql`)
 
